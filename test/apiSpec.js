@@ -2,9 +2,19 @@ import { expect } from 'chai';
 import fs from 'fs';
 import { authorize, listEvents } from '../lib';
 
-let AUTH;
+let _AUTH;
 
 describe('Calendar API', () => {
+
+  beforeEach((done) => {
+    require('dotenv').config();
+
+    authorize((err, auth) => {
+      _AUTH = auth;
+      done();
+    });
+  });
+
   it('should provide client_secret.json file', (done) => {
     fs.readFile('client_secret.json', (err, content) => {
       expect(err).to.be.null;
@@ -25,7 +35,7 @@ describe('Calendar API', () => {
   });
 
   it('listEvents() should show events as items', (done) => {
-    listEvents(AUTH, (err, response) => {
+    listEvents(_AUTH, (err, response) => {
       expect(err).to.be.null;
       expect(response)
         .to.have.property('items')

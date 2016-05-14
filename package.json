@@ -15,6 +15,7 @@
     "test:watch": "npm test --watch"
   },
   "dependencies": {
+    "dotenv": "^2.0.0",
     "google-auth-library": "^0.9.8",
     "googleapis": "^6.1.0",
     "hapi": "^13.4.0"

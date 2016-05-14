@@ -35,3 +35,5 @@ node_modules
 
 # google api files
 client_secret.json
+
+.env
