@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import fs from 'fs';
-import { authorize } from '../lib';
+import { authorize, listEvents } from '../lib';
+
+let AUTH;
 
 describe('Calendar API', () => {
   it('should provide client_secret.json file', (done) => {
@@ -11,11 +13,24 @@ describe('Calendar API', () => {
     });
   });
 
-  it('should autozied passed with credentials file', (done) => {
+  it('authorize() should autozied passed with credentials file', (done) => {
     authorize((err, auth) => {
       expect(err).to.be.null;
-      expect(auth.credentials.access_token).to.be.a.string;
+      expect(auth.credentials)
+        .to.be.an('object')
+        .to.have.property('access_token')
+        .that.is.a('string');
       done();
     });
+  });
+
+  it('listEvents() should show events as items', (done) => {
+    listEvents(AUTH, (err, response) => {
+      expect(err).to.be.null;
+      expect(response)
+        .to.have.property('items')
+        .that.is.an('array');
+      done();
+    })
   });
 });
