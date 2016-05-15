@@ -32,6 +32,7 @@ server.route([{
       if (err) return reply(err);
 
       let options = lib.eventBuilder(payload);
+      options.auth =  auth;
 
       lib.createEvent(options, (err, result) => {
         if (err) return reply(err);
