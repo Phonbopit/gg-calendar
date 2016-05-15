@@ -7,7 +7,7 @@ let _EVENT_ID;
 
 describe('Calendar API', () => {
 
-  beforeEach((done) => {
+  before((done) => {
     require('dotenv').config();
 
     authorize((err, auth) => {
