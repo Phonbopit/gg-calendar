@@ -1,6 +1,7 @@
 'use strict';
 
 const validate = require('./validate');
+const lib = require('./lib');
 
 module.exports = {
 
@@ -40,7 +41,16 @@ module.exports = {
 
   events: {
     handler: (request, reply) => {
-      reply('TODO: list events');
+      
+      lib.authorize((err, auth) => {
+        if (err) return reply(err);
+
+        lib.listEvents(auth, (err, response) => {
+          if (err) return reply(err);
+
+          return reply(response);
+        });
+      });
     }
   }
 }
