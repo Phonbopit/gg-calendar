@@ -8,7 +8,11 @@ module.exports = {
   index: {
     handler: (request, reply) => {
       reply({
-        message: 'Google Calendar API'
+        message: 'Google Calendar API',
+        endpoint: {
+          listEvents: 'GET /events',
+          createEvent: 'POST /events'
+        }
       });
     }
   },
